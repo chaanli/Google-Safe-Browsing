@@ -1,0 +1,44 @@
+# Google Safe Browsing Monitor Configuration
+# Copy this file to config.yaml and fill in your values
+
+monitoring:
+  interval: 1800  # Check interval in seconds (30 minutes)
+  timeout: 10     # HTTP request timeout
+  retries: 3      # Number of retries on failure
+  
+domains:
+  primary: "yourdomain.com"
+  pool:
+    - domain: "backup1.com"
+      age_days: 45
+      status: "clean"
+    - domain: "backup2.com"  
+      age_days: 60
+      status: "clean"
+    - domain: "backup3.com"
+      age_days: 30
+      status: "clean"
+
+api:
+  google_api_key: "YOUR_GOOGLE_API_KEY"
+  
+alerts:
+  enabled: true
+  telegram:
+    bot_token: "YOUR_BOT_TOKEN"
+    chat_id: "YOUR_CHAT_ID"
+  webhook: ""
+
+failover:
+  auto_switch: true
+  switch_delay: 30
+  dns_provider: "cloudflare"
+  cloudflare_api_key: "YOUR_CLOUDFLARE_API_KEY"
+  cloudflare_zone_id: "YOUR_ZONE_ID"
+
+logging:
+  level: "INFO"
+  file: "logs/gsb_monitor.log"
+  max_size_mb: 10
+  backup_count: 5
+
